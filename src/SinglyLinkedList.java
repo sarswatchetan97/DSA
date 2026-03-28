@@ -1,3 +1,5 @@
+import java.util.List;
+
 public class SinglyLinkedList {
     private static ListNode head;
 
@@ -196,6 +198,7 @@ public class SinglyLinkedList {
         return mainPtr;
     }
 
+    // Remove Duplicates from SLL
     public void removeDuplicate() {
         if (head == null) {
             return;
@@ -212,6 +215,41 @@ public class SinglyLinkedList {
         }
     }
 
+    // Insert in sorted singly linked list
+    public ListNode insertInSortedSinglyLinkedList(int value) {
+        ListNode newNode = new ListNode(11);
+
+        ListNode current = head;
+        ListNode temp = null;
+
+        while (current != null && current.data < newNode.data) {
+            temp = current;
+            current = current.next;
+        }
+
+        newNode.next = current;
+        temp.next = newNode;
+        return head;
+    }
+
+    // Remove given key from SLL
+    public void deleteNode(int key) {
+        ListNode current = head;
+        ListNode temp = null;
+
+        if (current != null && current.data == key) {
+            head = current.next;
+            return;
+        }
+
+        while (current!=null && current.data!=key) {
+            temp = current;
+            current = current.next;
+        }
+
+        if (current == null) return;
+        temp.next = current.next;
+    }
 
     public static void main(String[] args) {
         SinglyLinkedList singlyLinkedList = new SinglyLinkedList();
@@ -237,13 +275,24 @@ public class SinglyLinkedList {
 //        singlyLinkedList.insertLast(1);
 //        singlyLinkedList.insertLast(2);
 
-        singlyLinkedList.insert(1, 1);
-        singlyLinkedList.insert(2, 1);
-        singlyLinkedList.insert(3, 2);
-        singlyLinkedList.insert(4, 3);
-        singlyLinkedList.insert(5, 3);
+//        singlyLinkedList.insert(1, 1);
+//        singlyLinkedList.insert(2, 1);
+//        singlyLinkedList.insert(3, 2);
+//        singlyLinkedList.insert(4, 3);
+//        singlyLinkedList.insert(5, 3);
+//        singlyLinkedList.display();
+//        singlyLinkedList.removeDuplicate();
+//        System.out.println();
+//        singlyLinkedList.display();
+
+        singlyLinkedList.insertFirst(16);
+        singlyLinkedList.insertFirst(10);
+        singlyLinkedList.insertFirst(8);
+        singlyLinkedList.insertFirst(1);
+//        singlyLinkedList.display();
+        singlyLinkedList.insertInSortedSinglyLinkedList(11);
         singlyLinkedList.display();
-        singlyLinkedList.removeDuplicate();
+        singlyLinkedList.deleteNode(11);
         System.out.println();
         singlyLinkedList.display();
 //
