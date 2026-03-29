@@ -287,10 +287,39 @@ public class SinglyLinkedList {
     }
 
 
+    // To find start node in a loop
+    public ListNode startNodeInALoop() {
+        ListNode fastPtr = head;
+        ListNode slowPtr = head;
+
+        while (fastPtr!=null && fastPtr.next!=null) {
+            fastPtr = fastPtr.next.next;
+            slowPtr = slowPtr.next;
+
+            if (fastPtr == slowPtr) {
+                return getStartingNode(slowPtr);
+            }
+        }
+
+        return null;
+    }
+
+    private ListNode getStartingNode(ListNode slowPtr) {
+        ListNode temp = head;
+
+        while (temp != slowPtr) {
+            temp = temp.next;
+            slowPtr = slowPtr.next;
+        }
+        return temp; //starting node of the loop
+    }
+
     public static void main(String[] args) {
         SinglyLinkedList singlyLinkedList = new SinglyLinkedList();
         singlyLinkedList.createALoopInLinkedList();
         System.out.println(singlyLinkedList.containsLoop());
+        System.out.println(singlyLinkedList.startNodeInALoop().data);
+        singlyLinkedList.getStartingNode(singlyLinkedList.startNodeInALoop());
 //        singlyLinkedList.head = new ListNode(10);
 //        ListNode second = new ListNode(1);
 //        ListNode third = new ListNode(8);
